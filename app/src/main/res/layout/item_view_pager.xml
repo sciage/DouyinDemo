@@ -4,13 +4,22 @@
     android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+<!--    <com.example.administrator.douyin.FullWindowVideoView-->
+<!--        android:id="@+id/video_view"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:clickable="false"-->
+<!--        android:focusable="false"-->
+<!--        />-->
+
+
     <com.example.administrator.douyin.FullWindowVideoView
-        android:id="@+id/video_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/video_view"
         android:clickable="false"
-        android:focusable="false"
-        />
+        android:focusable="false" />
+
     <ImageView
         android:id="@+id/img_thumb"
         android:layout_width="match_parent"
@@ -91,10 +100,5 @@
         android:alpha="0"
         android:layout_centerInParent="true"
         />
-
-    <com.example.administrator.douyin.Love2
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </com.example.administrator.douyin.Love2>
 
 </RelativeLayout>

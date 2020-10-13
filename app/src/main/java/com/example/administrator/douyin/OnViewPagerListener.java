@@ -1,14 +1,13 @@
 package com.example.administrator.douyin;
 
 public interface OnViewPagerListener {
-    /*初始化完成*/
+    /*loading finished*/
     void onInitComplete();
 
-    /*释放的监听*/
+    /*Release monitor*/
     void onPageRelease(boolean isNext, int position);
 
-    /*选中的监听以及判断是否滑动到底部*/
+    /*Selected monitor and judge whether to slide to the bottom*/
     void onPageSelected(int position, boolean isBottom);
-
 
 }

@@ -6,9 +6,9 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.OrientationHelper;
-import android.support.v7.widget.RecyclerView;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.OrientationHelper;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "douyin";
     private RecyclerView mRecyclerView;
     private MyAdapter mAdapter;
-    MyLayoutManager2 myLayoutManager;
+    MyLayoutManager myLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initView() {
         mRecyclerView = findViewById(R.id.recycler);
-        myLayoutManager = new MyLayoutManager2(this, OrientationHelper.VERTICAL, false);
+        myLayoutManager = new MyLayoutManager(this, OrientationHelper.VERTICAL, false);
 
         mAdapter = new MyAdapter(this);
         mRecyclerView.setLayoutManager(myLayoutManager);
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageRelease(boolean isNext, int position) {
-                Log.e(TAG, "释放位置:" + position + " 下一页:" + isNext);
+                Log.e(TAG, "Release position:" + position + "Next:" + isNext);
                 int index = 0;
                 if (isNext) {
                     index = 0;
@@ -63,59 +63,11 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position, boolean bottom) {
-                Log.e(TAG, "选择位置:" + position + " 下一页:" + bottom);
+                Log.e(TAG, "Select position:" + position + "Next:" + bottom);
 
                 playVideo(0);
             }
         });
-    }
-
-    class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-        private int[] imgs = {R.mipmap.img_video_1, R.mipmap.img_video_2, R.mipmap.img_video_3, R.mipmap.img_video_4, R.mipmap.img_video_5, R.mipmap.img_video_6, R.mipmap.img_video_7, R.mipmap.img_video_8};
-        private int[] videos = {R.raw.video_1, R.raw.video_2, R.raw.video_3, R.raw.video_4, R.raw.video_5, R.raw.video_6, R.raw.video_7, R.raw.video_8};
-        private int index = 0;
-        private Context mContext;
-
-        public MyAdapter(Context context) {
-            this.mContext = context;
-        }
-
-
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_view_pager, parent, false);
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
-            holder.img_thumb.setImageResource(imgs[index]);
-            holder.videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + videos[index]));
-            index++;
-            if (index >= 7) {
-                index = 0;
-            }
-        }
-
-        @Override
-        public int getItemCount() {
-            return 88;
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder {
-            ImageView img_thumb;
-            VideoView videoView;
-            ImageView img_play;
-            RelativeLayout rootView;
-
-            public ViewHolder(View itemView) {
-                super(itemView);
-                img_thumb = itemView.findViewById(R.id.img_thumb);
-                videoView = itemView.findViewById(R.id.video_view);
-                img_play = itemView.findViewById(R.id.img_play);
-                rootView = itemView.findViewById(R.id.root_view);
-            }
-        }
     }
 
     private void releaseVideo(int index) {

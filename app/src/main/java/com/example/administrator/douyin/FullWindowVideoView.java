@@ -17,10 +17,9 @@ public class FullWindowVideoView extends VideoView {
     public FullWindowVideoView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
-
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        // 其实就是在这里做了一些处理。
+        // Actually did some processing here.
         int width = getDefaultSize(0, widthMeasureSpec);
         int height = getDefaultSize(0, heightMeasureSpec);
         setMeasuredDimension(width, height);
